@@ -1,4 +1,6 @@
-import type { NextConfig } from "next";
+const fs = require("fs");
+
+const content = `import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -20,3 +22,7 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+`;
+
+fs.writeFileSync("next.config.ts", content, "utf8");
+console.log("next.config.ts updated without BOM");
