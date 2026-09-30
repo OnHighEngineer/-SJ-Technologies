@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export function EliteLogo({ className = "w-8 h-8", dark = false }: { className?: string; dark?: boolean }) {
   return (

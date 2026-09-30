@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Phone, MapPin, Globe, MessageCircle } from "lucide-react";
 import { EliteLogo } from "@/components/common/Logo";
 

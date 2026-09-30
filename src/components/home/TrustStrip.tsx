@@ -1,4 +1,4 @@
-﻿import { ShieldCheck, Wrench, Clock, ThumbsUp } from "lucide-react";
+import { ShieldCheck, Wrench, Clock, ThumbsUp } from "lucide-react";
 
 const ITEMS = [
   {
