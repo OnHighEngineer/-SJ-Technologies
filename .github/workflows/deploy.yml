@@ -1,20 +1,11 @@
-﻿name: Manual Deploy Action
+name: Manual Deploy Action
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Deployment target environment'
-        required: true
-        default: 'production'
-        type: choice
-        options:
-          - production
-          - preview
 
 jobs:
   deploy:
-    name: Build & Trigger Production Deployment
+    name: Manual Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -32,11 +23,3 @@ jobs:
 
       - name: Verify Production Build
         run: npm run build
-
-      - name: Deploy to Vercel Production
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'

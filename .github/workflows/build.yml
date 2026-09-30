@@ -1,13 +1,11 @@
-﻿name: Manual & CI Build Verification
+name: Manual Build Verification
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
   build:
-    name: Build Next.js Application
+    name: Manual Build Next.js Application
     runs-on: ubuntu-latest
 
     steps:
