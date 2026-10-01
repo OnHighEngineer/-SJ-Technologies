@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
-import { ShoppingCart, ImageOff } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { TiltCard } from "@/components/motion/tilt-card";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/utils";
@@ -15,11 +15,15 @@ export function ProductCard({ product }: { product: Product }) {
     : null;
 
   return (
-    <TiltCard className="border border-[#E5E5E5] rounded-xl bg-white">
-      {/* Image */}
+    <TiltCard className="border border-[#E5E5E5] rounded-xl bg-white overflow-hidden shadow-xs hover:border-[#111111] transition-all">
+      {/* Product Image */}
       <Link href={`/shop?highlight=${product.id}`} className="block">
-        <div className="aspect-[4/3] bg-[#F5F5F5] rounded-t-xl overflow-hidden flex items-center justify-center">
-          <ImageOff className="w-10 h-10 text-[#CCCCCC]" />
+        <div className="aspect-[4/3] bg-[#F5F5F5] overflow-hidden relative group">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
       </Link>
 
@@ -27,18 +31,18 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="p-4">
         {/* Condition + savings */}
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs text-[#666666] capitalize">{product.condition}</span>
+          <span className="text-xs font-medium text-[#111111] capitalize px-2 py-0.5 bg-[#F5F5F5] rounded-md border border-[#E5E5E5]">
+            {product.condition}
+          </span>
           {savings && (
-            <>
-              <span className="text-[#E5E5E5]">·</span>
-              <span className="text-xs text-[#666666]">{savings}% off</span>
-            </>
+            <span className="text-xs font-semibold text-[#111111]">
+              {savings}% off
+            </span>
           )}
           {!product.inStock && (
-            <>
-              <span className="text-[#E5E5E5]">·</span>
-              <span className="text-xs text-[#666666]">Out of stock</span>
-            </>
+            <span className="text-xs text-[#999999] ml-auto">
+              Out of stock
+            </span>
           )}
         </div>
 
@@ -48,18 +52,18 @@ export function ProductCard({ product }: { product: Product }) {
         </h3>
 
         {/* Specs */}
-        <ul className="mb-3 space-y-0.5">
+        <ul className="mb-4 space-y-0.5 min-h-[36px]">
           {product.specs.slice(0, 3).map((s) => (
             <li key={s} className="text-xs text-[#666666]">
-              {s}
+              • {s}
             </li>
           ))}
         </ul>
 
         {/* Price + CTA */}
-        <div className="flex items-center justify-between gap-2 mt-auto">
+        <div className="flex items-center justify-between gap-2 pt-2 border-t border-[#E5E5E5]">
           <div>
-            <p className="font-semibold text-[#111111]">{formatPrice(product.price)}</p>
+            <p className="font-semibold text-[#111111] text-base">{formatPrice(product.price)}</p>
             {product.originalPrice && (
               <p className="text-xs text-[#999999] line-through">
                 {formatPrice(product.originalPrice)}
@@ -70,7 +74,7 @@ export function ProductCard({ product }: { product: Product }) {
             id={`add-to-cart-${product.id}`}
             disabled={!product.inStock}
             onClick={() => addItem(product)}
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#111111] text-white text-xs font-medium rounded-lg hover:bg-[#111111]/85 transition-colors disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#111111] text-white text-xs font-semibold rounded-lg hover:bg-[#111111]/85 transition-colors disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
           >
             <ShoppingCart className="w-3.5 h-3.5" />
             Add
