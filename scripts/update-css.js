@@ -1,4 +1,6 @@
-@tailwind base;
+const fs = require("fs");
+
+const css = `@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -36,3 +38,7 @@ body {
   outline: 2px solid #111111;
   outline-offset: 2px;
 }
+`;
+
+fs.writeFileSync("src/app/globals.css", css, "utf8");
+console.log("globals.css updated with standard tailwind directives");
